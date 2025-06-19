@@ -1,3 +1,4 @@
+//codigo final antes de pasar a clases
 #include <string>
 #include <iostream>
 #include <windows.h> 
