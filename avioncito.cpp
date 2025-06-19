@@ -31,6 +31,17 @@ void dibujar_enemigo(int x){
     cout<<espacio<<"<   >"<<endl;
     cout<<espacio<<"/---\\"<<endl;
 }
+void mostrar_game_over(int P) {
+    cout << "   _____                         ____                 \n";
+    cout << "  / ____|                       / __ \\                \n";
+    cout << " | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __ \n";
+    cout << " | | |_ |/ _` | '_ ` _ \\ / _ \\ | |  | \\ \\ / / _ \\ '__|\n";
+    cout << " | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |   \n";
+    cout << "  \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|   \n";
+    cout << "El puntaje maximo obtenido fue: "<< P << endl;
+}
+
+
 int main(){
     int x=0,y=36;
     //-1 indica el estado en el que no se encuentra algo en la pantalla, ya sea el enemigo o el disparo
@@ -38,9 +49,11 @@ int main(){
     int x2=-1,y2=-1;
     //definimos semilla aleatoria para la aparicion de enemigos aleatorios
     srand(time(NULL));
-    //contador para el enemigo
+    //contador para el tiempo de caida del enemigo
     int cont=0;
-     while (true) {
+    //contador para el puntaje
+    int puntaje=0;
+    while (true) {
         //imprimir la pantalla
         system ("cls"); 
         for(int i=0;i<40;i++){
@@ -56,6 +69,7 @@ int main(){
                 cout<<endl;
             }
         }
+        cout<<"Puntaje: "<<puntaje;
         //tema_controles de movimiento
         if (GetAsyncKeyState('A') & 0x8000 && x > 0) x-=2;
         if (GetAsyncKeyState('D') & 0x8000 && x < 152) x+=2;
@@ -80,6 +94,7 @@ int main(){
             y1=-1;         
         }
         //enemigo
+
         //el enemigo aparecera en una posicion aleatoria
         if(x2==-1&&y2==-1){
             x2=rand()%152;
@@ -99,6 +114,9 @@ int main(){
         if(y2>40){
             x2=-1;
             y2=-1;
+            system ("cls");
+            mostrar_game_over(puntaje);
+            break;
         }
         //colision por bala
     
@@ -119,9 +137,37 @@ int main(){
             y2=-1;
             x1=-1;
             y1=-1;
+            puntaje++;
         }
+        //colision para el avion con el enemigo
+        bool colision_en_X=false;
+        bool colision_en_Y=false;
+        //colision en x
+        /* 
+        x + 4 >= x2: el borde derecho del avión está a la derecha o tocando el borde izquierdo del enemigo.
+        x <= x2 + 4: el borde izquierdo del avión está a la izquierda o tocando el borde derecho del enemigo.
+        */
 
+        if (x + 4 >= x2 && x <= x2 + 4) {
+            colision_en_X = true;
+        }
+        //colision en y
+        /*
+        y + 3 >= y2: el borde inferior del avión está abajo o tocando el borde superior del enemigo.
+        y <= y2 + 2: el borde superior del avión está arriba o tocando el borde inferior del enemigo.
+        */
+        if (y + 3 >= y2 && y <= y2 + 2) {
+            colision_en_Y = true;
+        }
+        //colision fatal
+        if(colision_en_X&&colision_en_Y){
+            system ("cls");
+            mostrar_game_over(puntaje);
+            break;
+        }
+        //tecla para salir
         if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) break; // ESC para salir
+        //tiempo de espera
         Sleep(30);
     }
 }
