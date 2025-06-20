@@ -3,6 +3,7 @@
 #include <iostream>
 #include <windows.h> 
 #include <time.h>
+#include <conio.h>
 using namespace std;
 
 //ancho=156 lineas
@@ -40,6 +41,15 @@ void mostrar_game_over(int P) {
     cout << " | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |   \n";
     cout << "  \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|   \n";
     cout << "El puntaje maximo obtenido fue: "<< P << endl;
+    cout << "Presione k para salir" << endl;
+    while (true)
+    {
+        char x=getch();
+        if(x=='k'){
+            break;
+        }
+    }
+    
 }
 
 
