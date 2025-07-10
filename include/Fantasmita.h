@@ -10,17 +10,17 @@ class Fantasmita : public Enemigos{
 
     public:
         //constructor
-        Fantasmita (float _x, float _y, int _vida)
-            : Enemigos(_x,_y, AnchoF , AltoF, _vida, 0.15f, 0.0f, true, 5, true, 0), reboteConjunto(false){}
+        Fantasmita (float _x, float _y, int _vida, bool _activo)
+            : Enemigos(_x,_y, AnchoF , AltoF, _vida, 0.15f, 0.0f, _activo, 5, true, 0), reboteConjunto(false){}
 
         //Metodos virtuales
         void dibujar() override;
         void movimiento() override;
         void disparar(){}
 
-        //Metodos de Comportamiento
+        //Metodos Propios
         void cambiarDireccion();
-        
+
         //Getters
         bool getReboteConjunto() { return reboteConjunto; }
 

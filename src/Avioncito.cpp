@@ -2,6 +2,7 @@
 
 #include <windows.h> //para Handle (dibujo)
 #include <iostream> //para printf (dibujo)
+#include <cmath>
 
 #include "Constantes.h"
 #include "utilidades.h" //para mover cursor y limpiar zona
@@ -41,8 +42,8 @@ void Avioncito:: moverAbajo() {
 void Avioncito:: dibujar(){
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     
-    int dibujarX = static_cast<int>(x);
-    int dibujarY = static_cast<int>(y);
+    int dibujarX = static_cast<int>(round(x));
+    int dibujarY = static_cast<int>(round(y));
 
     // Limpia solo si cambió de posición
     if((lastX != dibujarX || lastY != dibujarY) && (lastX!=-1)) {
@@ -51,8 +52,8 @@ void Avioncito:: dibujar(){
         limpiarZona(dibujarX, dibujarY, AnchoA, AltoA);
     }
 
-    lastX = static_cast<int>(x);
-    lastY = static_cast<int>(y);
+    lastX = dibujarX;
+    lastY = dibujarY;
 
     if (animar) {
         SetConsoleTextAttribute(hConsole, 1);

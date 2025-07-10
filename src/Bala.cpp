@@ -7,16 +7,16 @@
 #include "constantes.h"
 
 //Modifica y en base a su velocidad
-void Bala:: movimientoBala(){
+void Bala::movimientoBala(){
     y-=velocidadY;
 }
 
 //Limpia la ultima zona y dibuja la bala
-void Bala:: dibujarBala(){
+void Bala::dibujarBala(){
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    int dibujarX = static_cast<int>(x);
-    int dibujarY = static_cast<int>(y);
+    int dibujarX = static_cast<int>(round(x));
+    int dibujarY = static_cast<int>(round(y));
 
     if((lastX != dibujarX || lastY != dibujarY) && (lastX!=-1)) {
         limpiarZona(lastX, lastY, AnchoB, AltoB);
@@ -45,7 +45,7 @@ void Bala:: dibujarBala(){
 }
 
 //Funcion que limpia la ultima posicion de manera independiente
-void Bala:: limpiarUltimaPosicion() {
+void Bala::limpiarUltimaPosicion() {
     if (lastX != -1 && lastY != -1) {
         limpiarZona(lastX, lastY, AnchoB, AltoB);
     }

@@ -1,6 +1,11 @@
 #ifndef BALA_H
 #define BALA_H
 
+#include <cmath>
+
+#include "Hitbox.h"
+#include "Constantes.h"
+
 class Bala {
     private:
         float x;
@@ -35,6 +40,11 @@ class Bala {
         //getters
         float getX() const { return x; }
         float getY() const { return y; }
+        Hitbox getHitbox() const { return Hitbox(static_cast<int>(round(x)), static_cast<int>(round(y)), AnchoB, AltoB); }
+        bool getActiva() const { return activa; }
+
+        //setters
+        void setActiva(bool estado) { activa = estado; }
 };
 
 #endif

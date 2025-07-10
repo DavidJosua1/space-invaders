@@ -2,6 +2,7 @@
 
 #include <cstdio>
 #include <windows.h>
+#include <cmath>
 
 #include "utilidades.h"//incluye <windows.h>
 
@@ -9,8 +10,8 @@
 void Fantasmita::dibujar() {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     
-    int dibujarX = static_cast<int>(getX());
-    int dibujarY = static_cast<int>(getY());
+    int dibujarX = static_cast<int>(round(getX()));
+    int dibujarY = static_cast<int>(round(getY()));
     
     // Limpia solo si cambió de posición
     if((lastX != dibujarX || lastY != dibujarY) && (lastX!=-1)) {
@@ -19,8 +20,8 @@ void Fantasmita::dibujar() {
         limpiarZona(dibujarX, dibujarY, AnchoF, AltoF);
     }
 
-    lastX = static_cast<int>(getX());
-    lastY = static_cast<int>(getY());
+    lastX = dibujarX;
+    lastY = dibujarY;
 
     SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
     moverCursor(dibujarX, dibujarY);     printf("%c%c%c%c%c", 219,219,219,219,219);
@@ -44,7 +45,7 @@ void Fantasmita::dibujar() {
 }
 
 //Funcion que modifica el movimiento
-void Fantasmita:: movimiento(){
+void Fantasmita::movimiento(){
 
     float nuevaX = getX() + getVelocidadX();
     float nuevaY = getY() + getVelocidadY();
@@ -65,6 +66,6 @@ void Fantasmita:: movimiento(){
 }
 
 //Funcion que cambia de direccion al fantasmita
-void Fantasmita:: cambiarDireccion(){
+void Fantasmita::cambiarDireccion(){
     setVelocidadX(-getVelocidadX());
 }

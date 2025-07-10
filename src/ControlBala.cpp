@@ -28,16 +28,17 @@ void ControlBala::actualizar() {
         b.dibujarBala();
         b.movimientoBala();
     }
-
-    //Elimina las balas que salieron del limite superior
+}
+void ControlBala::limpiarBalasInactivas() {
     balas.erase(
-        std::remove_if(balas.begin(), balas.end(), [](Bala& b) {
-            if (b.getY() <= Limite_vertical_superior) {
-                b.limpiarUltimaPosicion();  // LIMPIA donde se dibujó por última vez
-                return true;
-            }
-            return false;
-        }),
+        std::remove_if(balas.begin(), balas.end(),
+            [](Bala& b) {
+                if (!b.getActiva() || b.getY() <= Limite_vertical_superior) {
+                    b.limpiarUltimaPosicion();
+                    return true;
+                }
+                return false;
+            }),
         balas.end()
     );
 }

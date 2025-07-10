@@ -1,10 +1,12 @@
 #include "ControlFantasmitas.h"
 
 #include <vector>
+#include <algorithm>
 
 #include "Constantes.h"
 #include "Enemigos.h"
 #include "Fantasmita.h"
+#include "Bala.h"
 
 void ControlFantasmitas::agregarFantasmitas(int cantidad, int filas, int xInicial, int yInicial, int distancia) {
     distancia += AnchoF;
@@ -12,7 +14,7 @@ void ControlFantasmitas::agregarFantasmitas(int cantidad, int filas, int xInicia
         for(int j = 0; j < cantidad; j++) {
             int x = xInicial + i*distancia;
             int y = yInicial + j*(AltoF+1);
-            Fantasmita* f = new Fantasmita(static_cast<float>(x), static_cast<float>(y), 2);
+            Fantasmita* f = new Fantasmita(static_cast<float>(x), static_cast<float>(y), 2, true);
             enemigos.push_back(f);
         }
     }
@@ -71,3 +73,16 @@ ControlFantasmitas::~ControlFantasmitas() {
     }
     enemigos.clear();
 }
+
+void ControlFantasmitas::eliminarFantasmitasInactivos() {
+    for (auto it = enemigos.begin(); it != enemigos.end(); ) {
+        if (!(*it)->getActivo()) {
+            (*it)->limpiarUltimaPosicion();
+            delete *it;
+            it = enemigos.erase(it);
+        } else {    
+            ++it;
+        }
+    }
+}
+

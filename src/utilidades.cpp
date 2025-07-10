@@ -32,6 +32,3 @@ void ocultarCursor() {
     cursorInfo.bVisible = FALSE; // set the cursor visibility
     SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
-
-
-

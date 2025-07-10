@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Enemigos.h"
+#include "Bala.h"
 
 class ControlFantasmitas {
     private: 
@@ -19,7 +20,11 @@ class ControlFantasmitas {
         void bajarFantasmitas();
         bool comprobarReboteConjunto();
         void cambiarDireccionTodos();
-        void reiniciarReboteConjunto();
+        void reiniciarReboteConjunto(); 
+        void eliminarFantasmitasInactivos();
+
+        //getters
+        std::vector<Enemigos*>& getEnemigos() { return enemigos; }
 
         //Destructor
         ~ControlFantasmitas();

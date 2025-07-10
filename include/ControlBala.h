@@ -22,6 +22,7 @@ class ControlBala {
         void TiempoCargaDisparo();
         void disparar(float _x, float _y);
         void actualizar();
+        void limpiarBalasInactivas();
         
         //getters
         bool getDisparoHabilitado() const { return disparoHabilitado; }

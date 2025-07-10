@@ -17,6 +17,8 @@
 #include "Enemigos.h"
 #include "Fantasmita.h"
 #include "ControlFantasmitas.h"
+#include "Hitbox.h"
+#include "VerificarColisiones.h"
 
 void procesarEntrada(Avioncito& nave, ControlBala& balaJugador);
 
@@ -54,6 +56,12 @@ int main() {
             procesarEntrada(tungtungsahur,balasJugador);
             balasJugador.actualizar();
             balasJugador.TiempoCargaDisparo();
+
+            VerificarColisiones::EnemigoBalas(controlador.getEnemigos(), balasJugador.getBalas());
+
+            controlador.eliminarFantasmitasInactivos();
+            balasJugador.limpiarBalasInactivas();
+
             Sleep(30);  // Espera 100 ms (10 FPS aprox.)
         }
     }

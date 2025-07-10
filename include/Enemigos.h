@@ -1,6 +1,12 @@
 #ifndef ENEMIGOS_H
 #define ENEMIGOS_H
 
+#include <cmath>
+
+#include "Constantes.h"
+#include "Hitbox.h"
+#include "utilidades.h"
+
 class Enemigos{
     protected:
         int lastX;
@@ -41,7 +47,14 @@ class Enemigos{
         //Metodos virtuales
         virtual void movimiento() = 0;
         virtual void disparar() = 0;
-        virtual void dibujar() =0;
+        virtual void dibujar() =0 ;
+
+        //Metodo de limpieza
+        void limpiarUltimaPosicion(){    
+            if (lastX != -1 && lastY != -1) {
+            limpiarZona(lastX, lastY, AnchoF, AltoF);
+            }
+        }
 
         //getters
         int getAncho() const { return ancho; }
@@ -53,6 +66,8 @@ class Enemigos{
         bool getActivo() const { return activo; }
         bool getAnimar() const { return animar; }
         int getContadorAnimacion() const { return contadorAnimacion; }
+        Hitbox getHitbox() const { return Hitbox(static_cast<int>(round(x)), static_cast<int>(round(y)), ancho, alto); }
+        int getVida() const { return vida; }
 
         //setters
         void setVelocidadX(float nuevaVelocidadX) { velocidadX = nuevaVelocidadX; }
@@ -61,7 +76,9 @@ class Enemigos{
         void setY(float nuevoY) { y = nuevoY; }
         void setAnimar(bool nuevoAnimar){ animar = nuevoAnimar; }
         void setContadorAnimacion(int nuevoContador){ contadorAnimacion = nuevoContador; }
-        
+        void setVida(int nuevaVida) { vida = nuevaVida; }
+        void setActivo(bool estado) { activo = estado; }
+
         //Destructor virutal para ejecutar todos los destructores derivados
         virtual ~Enemigos() {}
 };
