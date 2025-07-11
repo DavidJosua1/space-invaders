@@ -29,11 +29,12 @@ int main() {
     // Ocultar cursor
     ocultarCursor();
     Menu MenuInicial;
+
     MenuInicial.desplegarMenu();
     if(MenuInicial.debeEntrar()){
         system ("cls");
         ControlFantasmitas controlador;
-        Avioncito tungtungsahur(20,25);
+        Avioncito avion(20,25);
         ControlBala balasJugador;
 
         // Agrega fantasmitas al juego (columnas, filas, x inicial, y inicial, separación horizontal)
@@ -51,20 +52,24 @@ int main() {
                 controlador.bajarFantasmitas();
             }
 
-            tungtungsahur.dibujar();
-
-            procesarEntrada(tungtungsahur,balasJugador);
             balasJugador.actualizar();
             balasJugador.TiempoCargaDisparo();
 
             VerificarColisiones::EnemigoBalas(controlador.getEnemigos(), balasJugador.getBalas());
+            VerificarColisiones::AvioncitoEnemigo(controlador.getEnemigos(), avion);
 
             controlador.eliminarFantasmitasInactivos();
             balasJugador.limpiarBalasInactivas();
-
+            
+            if(!avion.getEstado()) { 
+                bool game_over = true;
+                break;
+            }
             Sleep(30);  // Espera 100 ms (10 FPS aprox.)
         }
     }
+
+    
     return 0;
 }
 

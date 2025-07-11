@@ -78,3 +78,12 @@ void Avioncito:: dibujar(){
         contadorAnimacion = 0;
     }
 }
+
+void Avioncito::limpiarAvion(){
+    x = -100;
+    y = -100;
+    if (lastX != -1 && lastY != -1) {
+        limpiarZona(lastX, lastY, AnchoA, AltoA);
+    }
+}
+

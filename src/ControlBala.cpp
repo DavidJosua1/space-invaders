@@ -8,10 +8,10 @@
 //Controla el tiempo de recarga del disparo
 void ControlBala::TiempoCargaDisparo(){
     if(!disparoHabilitado) {
-        tiempodeCarga++;
-        if(tiempodeCarga >= 3){
+        contadorDeRecarga++;
+        if(contadorDeRecarga >= tiempoDeRecarga){
             disparoHabilitado = true;
-            tiempodeCarga = 0;  // 
+            contadorDeRecarga = 0;  // 
         }
     }
 }

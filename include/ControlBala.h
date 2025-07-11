@@ -9,15 +9,18 @@ class ControlBala {
     private:
         std:: vector<Bala> balas;
         bool disparoHabilitado;
-        int tiempodeCarga;
+        int contadorDeRecarga;
+        int tiempoDeRecarga;
 
     public:
         //constructor
         ControlBala() 
         : balas(),
           disparoHabilitado(true), 
-          tiempodeCarga(0) {}
-                                                
+          contadorDeRecarga(0),
+          tiempoDeRecarga(6)
+        {}
+                                            
         //metodos de comportamiento
         void TiempoCargaDisparo();
         void disparar(float _x, float _y);

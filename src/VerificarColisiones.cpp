@@ -1,7 +1,7 @@
 #include "VerificarColisiones.h"
 
-void VerificarColisiones::EnemigoBalas(std::vector<Enemigos*>& enemigos, std::vector<Bala>& balas){
-        for (auto& bala : balas) {
+void VerificarColisiones::EnemigoBalas(std::vector<Enemigos*>& enemigos, std::vector<Bala>& balas) {
+    for (auto& bala : balas) {
         if (!bala.getActiva()) continue; // Si tienes ese método
 
         for (auto& enemigo : enemigos) {
@@ -18,6 +18,25 @@ void VerificarColisiones::EnemigoBalas(std::vector<Enemigos*>& enemigos, std::ve
                 }
 
                 break; // la bala ya colisionó, no sigas verificando
+            }
+        }
+    }
+}
+
+void VerificarColisiones::AvioncitoEnemigo(std::vector<Enemigos*>& enemigos, Avioncito& avioncito) {
+    for(auto& enemigo : enemigos){
+        if(!enemigo->getActivo()) continue;
+
+        if(enemigo->getHitbox().colisionaCon(avioncito.getHitbox())){
+            enemigo->setVida(enemigo->getVida() - 1);
+            avioncito.setVida(avioncito.getVida() - 1);
+            
+            if(enemigo->getVida() <= 0) {
+                enemigo->setActivo(false);
+            }
+            if(avioncito.getVida() <= 0) {
+                avioncito.limpiarAvion();
+                avioncito.setActivo(false);
             }
         }
     }
