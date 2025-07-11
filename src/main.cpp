@@ -19,6 +19,7 @@
 #include "ControlFantasmitas.h"
 #include "Hitbox.h"
 #include "VerificarColisiones.h"
+#include "GameOver.h"
 
 void procesarEntrada(Avioncito& nave, ControlBala& balaJugador);
 
@@ -29,6 +30,8 @@ int main() {
     // Ocultar cursor
     ocultarCursor();
     Menu MenuInicial;
+    GameOver JuegoTerminado;
+    bool game_over = false;
 
     MenuInicial.desplegarMenu();
     if(MenuInicial.debeEntrar()){
@@ -55,6 +58,9 @@ int main() {
             balasJugador.actualizar();
             balasJugador.TiempoCargaDisparo();
 
+            avion.dibujar();
+            procesarEntrada(avion, balasJugador);
+
             VerificarColisiones::EnemigoBalas(controlador.getEnemigos(), balasJugador.getBalas());
             VerificarColisiones::AvioncitoEnemigo(controlador.getEnemigos(), avion);
 
@@ -62,14 +68,17 @@ int main() {
             balasJugador.limpiarBalasInactivas();
             
             if(!avion.getEstado()) { 
-                bool game_over = true;
+                game_over = true;
                 break;
             }
             Sleep(30);  // Espera 100 ms (10 FPS aprox.)
         }
     }
 
-    
+    if(game_over){
+        JuegoTerminado.desplegarJuegoTerminado();
+    }
+
     return 0;
 }
 
