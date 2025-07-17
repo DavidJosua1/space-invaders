@@ -17,6 +17,7 @@ class Avioncito {
         float velocidadY;
         int vida;
         bool estado;
+        int daño;
 
     public:
         //Constructores
@@ -30,7 +31,8 @@ class Avioncito {
           velocidadX(3.0f),
           velocidadY(1.5f),
           vida(1),
-          estado(true)
+          estado(true),
+          daño(1)
         {}
 
         //Metodos de comportamiento
@@ -44,6 +46,9 @@ class Avioncito {
         //setters
         void setVida(int nuevaVida) { vida = nuevaVida; }
         void setActivo(bool nuevoEstado) { estado = nuevoEstado; }
+        void setDaño(int nuevoDaño) { daño = nuevoDaño; }
+        void setVelocidadX(float nuevaVelocidadX) { velocidadX = nuevaVelocidadX; }
+        void setVelocidadY(float nuevaVelocidadY) { velocidadY = nuevaVelocidadY; }
          
         //getters
         float getX() const { return x; }
@@ -51,6 +56,9 @@ class Avioncito {
         int getVida() const { return vida; }
         bool getEstado() const { return estado; }
         Hitbox getHitbox() const { return Hitbox(static_cast<int>(round(x)), static_cast<int>(round(y)), AnchoA, AltoA); }
+        int getDaño() const { return daño; }
+        float getVelocidadX() const { return velocidadX; }
+        float getVelocidadY() const { return velocidadY; }
 };
 
 #endif

@@ -47,7 +47,7 @@ class Enemigos{
         //Metodos virtuales
         virtual void movimiento() = 0;
         virtual void disparar() = 0;
-        virtual void dibujar() =0 ;
+        virtual void dibujar() = 0;
 
         //Metodo de limpieza
         void limpiarUltimaPosicion(){    

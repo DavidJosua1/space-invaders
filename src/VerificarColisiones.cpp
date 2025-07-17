@@ -1,6 +1,6 @@
 #include "VerificarColisiones.h"
 
-void VerificarColisiones::EnemigoBalas(std::vector<Enemigos*>& enemigos, std::vector<Bala>& balas) {
+void VerificarColisiones::EnemigoBalas(std::vector<Enemigos*>& enemigos, std::vector<Bala>& balas, Avioncito& avioncito) {
     for (auto& bala : balas) {
         if (!bala.getActiva()) continue; // Si tienes ese método
 
@@ -10,7 +10,7 @@ void VerificarColisiones::EnemigoBalas(std::vector<Enemigos*>& enemigos, std::ve
             if (bala.getHitbox().colisionaCon(enemigo->getHitbox())) {
                 // ↓↓↓ Lógica de colisión ↓↓↓
                 bala.setActiva(false);               // Método que debes tener en Bala
-                enemigo->setVida(enemigo->getVida() - 1); // Métodos que podrías implementar
+                enemigo->setVida(enemigo->getVida() - avioncito.getDaño()); // Métodos que podrías implementar
                 enemigo->setAnimar(true);
 
                 if (enemigo->getVida() <= 0) {
@@ -28,7 +28,7 @@ void VerificarColisiones::AvioncitoEnemigo(std::vector<Enemigos*>& enemigos, Avi
         if(!enemigo->getActivo()) continue;
 
         if(enemigo->getHitbox().colisionaCon(avioncito.getHitbox())){
-            enemigo->setVida(enemigo->getVida() - 1);
+            enemigo->setVida(enemigo->getVida() - avioncito.getDaño());
             avioncito.setVida(avioncito.getVida() - 1);
             
             if(enemigo->getVida() <= 0) {

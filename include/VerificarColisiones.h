@@ -10,7 +10,7 @@
 class VerificarColisiones {
     public:
     
-    static void EnemigoBalas(std::vector<Enemigos*>& enemigos, std::vector<Bala>& balas);
+    static void EnemigoBalas(std::vector<Enemigos*>& enemigos, std::vector<Bala>& balas, Avioncito& avioncito);
     static void AvioncitoEnemigo(std::vector<Enemigos*>& enemigos, Avioncito& Avioncito);
 };
 

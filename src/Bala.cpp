@@ -2,6 +2,7 @@
 
 #include <windows.h>
 #include <iostream>
+#include <cmath>
 
 #include "utilidades.h"
 #include "constantes.h"
